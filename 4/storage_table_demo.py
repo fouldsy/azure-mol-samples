@@ -51,7 +51,7 @@ if response == True:
 else:
     print('Error creating Storage Table.\n')
 
-time.sleep(3)
+time.sleep(1)
 
 
 ###
@@ -91,7 +91,7 @@ pizza.cost = 12
 table_service.insert_entity('pizzatable', pizza)
 print('Created entry for Hawaiian...\n')
 
-time.sleep(3)
+time.sleep(1)
 
 
 ###
@@ -107,7 +107,7 @@ for pizza in pizzas:
     print('Name: ' + pizza.description)
     print('Cost: ' + str(pizza.cost) + '\n')
 
-time.sleep(3)
+time.sleep(1)
 
 
 ###

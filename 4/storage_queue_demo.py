@@ -52,9 +52,6 @@ else:
     print('Error creating Storage Queue.\n')
 
 
-time.sleep(1)
-
-
 ###
 # Use the Azure Storage Storage SDK for Python to drop some messages in our Queue
 ###
@@ -69,7 +66,7 @@ queue_service.put_message('pizzaqueue', u'Pepperoni pizza ordered.')
 queue_service.put_message('pizzaqueue', u'Pepperoni pizza ordered.')
 
 
-time.sleep(3)
+time.sleep(1)
 
 
 ###
@@ -82,7 +79,7 @@ metadata = queue_service.get_queue_metadata('pizzaqueue')
 print('Number of messages in the queue: ' + str(metadata.approximate_message_count))
 
 
-time.sleep(3)
+time.sleep(1)
 
 
 ###
