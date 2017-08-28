@@ -1,0 +1,9 @@
+Edit `config.js` to provide your own values for:
+
+    config.endpoint
+    config.primaryKey
+
+Both of these values are shown at the end of the output from the create_cosmosdb.py script.
+You can also find these values in the Azure portal under 'Keys' for your Cosmos DB account.
+
+Once updated, run this locally with `npm start`, or ideally, push to Azure Web Apps
