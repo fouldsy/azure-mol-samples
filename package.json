@@ -1,0 +1,17 @@
+{
+  "name": "PizzaStore",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "description": "Very basic pizza store for our Month of Lunches examples",
+  "author": {
+    "name": "Iain Foulds",
+    "email": "i_foulds@live.com"
+  },
+  "dependencies": {
+    "documentdb": "^1.12.2",
+    "express": "~4.14.0"
+  }
+}
