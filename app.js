@@ -18,8 +18,6 @@ var server = http.createServer(function(request, response) {
 
     response.writeHead(200, {"Content-Type": "text/plain"});
 
-    response.write('Current read endpoint is: ' + readEndpoint + '\n\n');
-
     client.queryDocuments(
             collectionUrl,
             'SELECT c.description,c.cost FROM c'
