@@ -109,19 +109,20 @@ raw_input('Press Enter to continue...')
 # For now, let's query for the pizza description and cost. You can use the 'Document explorer' in the Azure portal for you
 # Cosmos DB database to see all the properties each document contains.
 query = { 'query': 'SELECT pizza.description,pizza.cost FROM pizza' }    
-        
-# options = {} 
-# options['enableCrossPartitionQuery'] = True
-# options['maxItemCount'] = 2
 
 # Pass the query through the SDK, then return and print the results.
 pizzas = client.QueryDocuments(collection['_self'], query, options)
 results = list(pizzas)
 
-# for pizza in pizzas:
-#     print('Name: ' + pizza[0])
-#     print('Cost: ' + str(pizza[1]) + '\n')
-
 print(results)
+
+
+###
+# Output connection info for Cosmos DB database.
+# This information is needed for the sample web app that connects to the Cosmos DB database instance
+###
+print('\nTo connect to this Cosmos DB database from the sample web app in the next section, use the following connection info:')
+print('\nconfig.endpoint = "https://' + cosmosdb_name + '.documents.azure.com";')
+print('config.primaryKey = "' + cosmosdb_primarykey + '";')
 
 time.sleep(1)
