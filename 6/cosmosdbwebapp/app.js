@@ -14,7 +14,8 @@ var lib = require("./node_modules/documentdb/lib/");
 var connectionPolicy = new lib.DocumentBase.ConnectionPolicy();
 
 // Using automatic discovery is a more dynamic approach, and your code requires no changes
-// as you add or remove endpoints in Cosmos DB
+// as you add or remove endpoints in Cosmos DB.
+// If you wanted to use automatiic endpoint discovery, you would uncomment the following line.
 //connectionPolicy.EnableEndpointDiscovery = 'True';
 
 // Using a list of preferred locations allows you to control the order in which endpoints
@@ -41,7 +42,7 @@ var server = http.createServer(function(request, response) {
     });
 
     // Output the current read endpoint
-    // This is the power of Cosmos DB. The APIs determine the closest read endpoint and route your
+    // This is the power of Cosmos DB. The APIs determine the most appropriate read endpoint and route your
     // requests accordingly. There's nothing your app does here.
     // This is purely for informational purposes. You just query the database in the next code block
     // and let the APIs determine the most appropriate endpoint to pull data from.
