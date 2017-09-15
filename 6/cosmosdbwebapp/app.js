@@ -38,7 +38,7 @@ var server = http.createServer(function(request, response) {
     // Output the current write endpoint
     // This is the endpoint where all write requests route through to ensure data consistency
     client.getWriteEndpoint(function(endpoint) {
-        response.write('Current write endpoint is: ' + endpoint + '\n');
+        response.write('Current write endpoint is: ' + endpoint + '\n\n');
     });
 
     // Output the current read endpoint
