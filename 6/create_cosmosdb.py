@@ -116,12 +116,14 @@ results = list(pizzas)
 
 print(results)
 
+time.sleep(3)
+
 
 ###
 # Output connection info for Cosmos DB database.
 # This information is needed for the sample web app that connects to the Cosmos DB database instance
 ###
-print('\nTo connect to this Cosmos DB database from the sample web app in the next section, use the following connection info:')
+print('\n\nTo connect to this Cosmos DB database from the sample web app in the next section, use the following connection info:')
 print('\nconfig.endpoint = "https://' + cosmosdb_name + '.documents.azure.com";')
 print('config.primaryKey = "' + cosmosdb_primarykey + '";')
 
