@@ -24,6 +24,7 @@
     }
   },
   "variables": {
+    "availabilitySetName": "azuremolavailabilityset",
     "vmSize": "Standard_DS1_v2",
     "vmName": "vm",
     "ubuntuOSVersion": "16.04-LTS",
@@ -40,6 +41,17 @@
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]"
   },
   "resources": [
+    {
+      "type": "Microsoft.Compute/availabilitySets",
+      "name": "[variables('availabilitySetName')]",
+      "apiVersion": "2016-04-30-preview",
+	  "location": "[resourceGroup().location]",
+	  "properties": {
+	    "platformFaultDomainCount": "3",
+	    "platformUpdateDomainCount": "2",
+	    "managed" : "true"
+	  }
+    },
     {
       "apiVersion": "2017-04-01",
       "type": "Microsoft.Network/virtualNetworks",
@@ -66,6 +78,10 @@
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[concat(variables('nicName'), copyIndex())]",
       "location": "[variables('location')]",
+      "copy": {
+        "name": "niccopy",
+        "count": "[parameters('vmCount')]"
+      },
       "dependsOn": [
         "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
       ],
@@ -81,10 +97,6 @@
             }
           }
         ]
-      },
-      "copy": {
-        "name": "vmcopy",
-        "count": "[parameters('vmCount')]"
       }
     },
     {
@@ -92,10 +104,17 @@
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(variables('vmName'), copyIndex())]",
       "location": "[variables('location')]",
+      "copy": {
+        "name": "vmcopy",
+        "count": "[parameters('vmCount')]"
+      },
       "dependsOn": [
-        "[concat('Microsoft.Network/networkInterfaces/', [concat(variables('nicName'), copyIndex())])]"
+        "[concat('Microsoft.Network/networkInterfaces/', concat(variables('nicName'), copyIndex()))]"
       ],
       "properties": {
+        "availabilitySet": {
+          "id": "[resourceId('Microsoft.Compute/availabilitySets', variables('availabilitySetName'))]"
+        },
         "hardwareProfile": {
           "vmSize": "[variables('vmSize')]"
         },
@@ -128,13 +147,9 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces', [concat(variables('nicName'), copyIndex())])]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('nicName'), copyIndex()))]"
             }
           ]
-        },
-        "copy": {
-          "name": "vmcopy",
-          "count": "[parameters('vmCount')]"
         }
       }
     }
