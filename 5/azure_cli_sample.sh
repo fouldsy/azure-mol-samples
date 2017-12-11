@@ -65,14 +65,14 @@ az network nsg rule create \
 
 # Create an additional network security group for remote access
 az network nsg create \
-    --resource-group vnetmol \
+    --resource-group azuremolchapter5 \
     --name remotensg
 
 # Create an additional network security group rule to allow SSH connections
 # Here, we don't specify the address prefixes,direction, or destinations, as the
 # Azure CLI can use smart defaults to populate these for us
 az network nsg rule create \
-    --resource-group vnetmol \
+    --resource-group azuremolchapter5 \
     --nsg-name remotensg \
     --name allowssh \
     --protocol tcp \
@@ -84,7 +84,7 @@ az network nsg rule create \
 # security group. This is a little different to the previous steps where we
 # associated a network security group with a virtual network subnet.
 az network vnet subnet create \
-    --resource-group vnetmol \
+    --resource-group azuremolchapter5 \
     --vnet-name vnetmol \
     --name remotesubnet \
     --address-prefix 10.0.2.0/24 \
@@ -93,17 +93,17 @@ az network vnet subnet create \
 # Create a VM that will act as a web server
 # Attach the virtual NIC created in the previous steps
 az vm create \
-    --resource-group vnetmol \
+    --resource-group azuremolchapter5 \
     --name webvm \
     --nics webvnic \
-    --image UbuntuLTS \
+    --image ubuntults \
     --admin-username adminuser \
     --generate-ssh-keys
 
 # Create a VM that will act as our remote connection VM
 # Connect the VM to the virtual network subnet for remote connectivity
 az vm create \
-    --resource-group vnetmol \
+    --resource-group azuremolchapter5 \
     --name remotevm \
     --vnet-name vnetmol \
     --subnet remotesubnet \
