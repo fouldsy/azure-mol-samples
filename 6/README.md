@@ -1,13 +1,8 @@
-These samples expect you to run Python 2.7 with the Azure DocumentDB SDK for Python. Hopefully the SDK becomes more stable with Python 3.x.
+Very basic Azure Resource Manager template that deploys the same VM as created in chapter 2. This example shows how the different Resource Manager components are pieced together to build a VM. You are prompted for the SSH public key, and that's it. This approach makes it quick to deploy VMs in a clean, consistent manner. More values can be changed to parameters that you are prompted for as you deploy.
 
-When working in the Azure Cloud Shell, run the following commands to install the appropriate packages required by these samples:
-
-```
-pip2 install --user azurerm pydocumentdb
-```
-
-To then run each sample in the Azure Cloud Shell, make sure you use the Python 2.7 binary. As an example:
-
-```
-python2.7 create_cosmosdb.py
-```
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ffouldsy%2Fazure-samples%2Fmaster%2F7%2Fwebvm-template.json" target="_blank">
+    <img src="http://azuredeploy.net/deploybutton.png"/>
+</a>
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Ffouldsy%2Fazure-samples%2Fmaster%2F7%2Fwebvm-template.json" target="_blank">
+    <img src="http://armviz.io/visualizebutton.png"/>
+</a>
