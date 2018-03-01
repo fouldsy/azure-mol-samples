@@ -1,0 +1,205 @@
+{
+  "luis_schema_version": "2.1.0",
+  "versionId": "0.1",
+  "name": "azuremol",
+  "desc": "Sample LUIS app for \"Learn Azure in a Month of Lunches\"",
+  "culture": "en-us",
+  "intents": [
+    {
+      "name": "greetings"
+    },
+    {
+      "name": "None"
+    },
+    {
+      "name": "orderFood"
+    },
+    {
+      "name": "orderStatus"
+    },
+    {
+      "name": "showMenu"
+    }
+  ],
+  "entities": [
+    {
+      "name": "pizza.type"
+    }
+  ],
+  "composites": [],
+  "closedLists": [],
+  "bing_entities": [],
+  "model_features": [],
+  "regex_features": [],
+  "utterances": [
+    {
+      "text": "do you have my order",
+      "intent": "orderStatus",
+      "entities": []
+    },
+    {
+      "text": "do you have pizza?",
+      "intent": "showMenu",
+      "entities": []
+    },
+    {
+      "text": "good evening",
+      "intent": "greetings",
+      "entities": []
+    },
+    {
+      "text": "hello",
+      "intent": "greetings",
+      "entities": []
+    },
+    {
+      "text": "hi",
+      "intent": "greetings",
+      "entities": []
+    },
+    {
+      "text": "hola",
+      "intent": "greetings",
+      "entities": []
+    },
+    {
+      "text": "how long until i get my food",
+      "intent": "orderStatus",
+      "entities": []
+    },
+    {
+      "text": "howdy",
+      "intent": "greetings",
+      "entities": []
+    },
+    {
+      "text": "i'd like a pepperoni pizza",
+      "intent": "orderFood",
+      "entities": [
+        {
+          "entity": "pizza.type",
+          "startPos": 11,
+          "endPos": 19
+        }
+      ]
+    },
+    {
+      "text": "is my pizza ready yet?",
+      "intent": "orderStatus",
+      "entities": []
+    },
+    {
+      "text": "list pizzas",
+      "intent": "showMenu",
+      "entities": []
+    },
+    {
+      "text": "one cheese pizza",
+      "intent": "orderFood",
+      "entities": [
+        {
+          "entity": "pizza.type",
+          "startPos": 4,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "order food",
+      "intent": "orderFood",
+      "entities": []
+    },
+    {
+      "text": "order pepperoni pizza",
+      "intent": "orderFood",
+      "entities": [
+        {
+          "entity": "pizza.type",
+          "startPos": 6,
+          "endPos": 14
+        }
+      ]
+    },
+    {
+      "text": "order pizza",
+      "intent": "orderFood",
+      "entities": []
+    },
+    {
+      "text": "order status",
+      "intent": "orderStatus",
+      "entities": []
+    },
+    {
+      "text": "show food",
+      "intent": "showMenu",
+      "entities": []
+    },
+    {
+      "text": "show me food choices",
+      "intent": "showMenu",
+      "entities": []
+    },
+    {
+      "text": "show menu",
+      "intent": "showMenu",
+      "entities": []
+    },
+    {
+      "text": "show pizzas",
+      "intent": "showMenu",
+      "entities": []
+    },
+    {
+      "text": "show status",
+      "intent": "orderStatus",
+      "entities": []
+    },
+    {
+      "text": "veggie pizza",
+      "intent": "orderFood",
+      "entities": [
+        {
+          "entity": "pizza.type",
+          "startPos": 0,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "what ' s on the menu",
+      "intent": "showMenu",
+      "entities": []
+    },
+    {
+      "text": "what can i order?",
+      "intent": "showMenu",
+      "entities": []
+    },
+    {
+      "text": "what pizza do you have?",
+      "intent": "showMenu",
+      "entities": []
+    },
+    {
+      "text": "what pizzas are available",
+      "intent": "showMenu",
+      "entities": []
+    },
+    {
+      "text": "what's up",
+      "intent": "greetings",
+      "entities": []
+    },
+    {
+      "text": "when will my pizza be delivered",
+      "intent": "orderStatus",
+      "entities": []
+    },
+    {
+      "text": "where ' s my food?",
+      "intent": "orderStatus",
+      "entities": []
+    }
+  ]
+}
