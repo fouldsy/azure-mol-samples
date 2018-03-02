@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Azure Month of Lunches IoT</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta name="viewport" content="device-width, initial-scale=1.0">
+  </head>
+  <body>
+
+    <p id='pi-data'></p>
+    <script>
+      var HOST = location.origin.replace(/^http/, 'ws')
+      var ws = new WebSocket(HOST);
+      var el = document.getElementById('pi-data');
+
+      ws.onmessage = function (event) {
+        var parsed = JSON.parse(event.data);
+
+        el.innerHTML = parsed.deviceId + '<br />Temperature: ' + (parsed.temperature).toFixed(1) + ' C<br />Humidity: ' + (parsed.humidity).toFixed(1) + ' %<br />Last update: ' + parsed.time;
+        };
+    </script>
+
+  </body>
+</html>
