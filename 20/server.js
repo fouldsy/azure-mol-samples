@@ -7,7 +7,7 @@ const WebSocket = require('ws');
 const moment = require('moment');
 
 var connectionString = process.env.iot;
-var consumerGroup = 'molwebapp';
+var consumerGroup = process.env.consumergroup;
 
 var index = require('./routes/index');
 
