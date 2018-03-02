@@ -6,7 +6,7 @@ const iotHubClient = require('./IoTHub/iot-hub.js');
 const WebSocket = require('ws');
 const moment = require('moment');
 
-var connectionString = 'HostName=azuremol.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=SPV0TyIHkucKG8mUnlYcabVVFAiplTwoMndKHCzViLM=';
+var connectionString = process.env.iot;
 var consumerGroup = 'molwebapp';
 
 var index = require('./routes/index');
