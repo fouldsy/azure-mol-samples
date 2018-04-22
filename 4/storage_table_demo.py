@@ -1,8 +1,11 @@
-import string,random,time,azurerm,json
-from azure.storage.table import TableService, Entity
+import string,random,time,azurerm,json,subprocess
+
+from azure.cosmosdb.table.tableservice import TableService
+from azure.cosmosdb.table.models import Entity
 
 # Define variables to handle Azure authentication
-auth_token = azurerm.get_access_token_from_cli()
+get_token_cli = subprocess.Popen(['az account get-access-token | jq  -r .accessToken'], stdout=subprocess.PIPE, shell=True)
+auth_token = str(get_token_cli.communicate()[0]).rstrip()
 subscription_id = azurerm.get_subscription_from_cli()
 
 # Define variables with random resource group and storage account names
@@ -24,7 +27,8 @@ else:
 response = azurerm.create_storage_account(auth_token, subscription_id, resourcegroup_name, storageaccount_name,  location, storage_type='Standard_LRS')
 if response.status_code == 202:
     print('Storage account: ' + storageaccount_name + ' created successfully.')
-    time.sleep(2)
+    print('\nWaiting for storage account to be ready before we create a Table')
+    time.sleep(15)
 else:
     print('Error creating storage account')
 
