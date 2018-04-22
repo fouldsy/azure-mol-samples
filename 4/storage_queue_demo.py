@@ -1,8 +1,9 @@
-import string,random,time,azurerm,json
+import string,random,time,azurerm,json,subprocess
 from azure.storage.queue import QueueService
 
 # Define variables to handle Azure authentication
-auth_token = azurerm.get_access_token_from_cli()
+get_token_cli = subprocess.Popen(['az account get-access-token | jq  -r .accessToken'], stdout=subprocess.PIPE, shell=True)
+auth_token = str(get_token_cli.communicate()[0]).rstrip()
 subscription_id = azurerm.get_subscription_from_cli()
 
 # Define variables with random resource group and storage account names
@@ -24,7 +25,8 @@ else:
 response = azurerm.create_storage_account(auth_token, subscription_id, resourcegroup_name, storageaccount_name,  location, storage_type='Standard_LRS')
 if response.status_code == 202:
     print('Storage account: ' + storageaccount_name + ' created successfully.')
-    time.sleep(2)
+    print('\nWaiting for storage account to be ready before we create a Queue')
+    time.sleep(15)
 else:
     print('Error creating storage account')
 
