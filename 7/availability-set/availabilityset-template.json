@@ -48,7 +48,7 @@
 	  "location": "[resourceGroup().location]",
 	  "properties": {
 	    "platformFaultDomainCount": "2",
-	    "platformUpdateDomainCount": "5",
+	    "platformUpdateDomainCount": "3",
 	    "managed" : "true"
 	  }
     },
