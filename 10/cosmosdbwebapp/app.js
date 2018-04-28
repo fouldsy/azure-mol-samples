@@ -25,7 +25,7 @@ var connectionPolicy = new lib.DocumentBase.ConnectionPolicy();
 connectionPolicy.PreferredLocations = ['West Europe', 'East US'];
 
 // Now actually make the connection to Cosmos DB using our endpoint, key, and connection policy
-var client = new documentClient(config.endpoint, { "masterKey": config.primaryKey }, connectionPolicy);
+var client = new documentClient(config.uri, { "masterKey": config.primaryKey }, connectionPolicy);
 var databaseUrl = `dbs/${config.database.id}`;
 var collectionUrl = `${databaseUrl}/colls/${config.collection.id}`;
 
