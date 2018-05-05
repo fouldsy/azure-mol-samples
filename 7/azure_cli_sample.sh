@@ -30,6 +30,7 @@ az vm create \
 	--resource-group azuremolchapter7az \
 	--name zonedvm1 \
 	--image ubuntults \
+	--size Standard_B1ms \
 	--admin-username azuremol \
 	--generate-ssh-keys \
 	--zone 1
@@ -40,6 +41,7 @@ az vm create \
 	--resource-group azuremolchapter7az \
 	--name zonedvm3 \
 	--image ubuntults \
+	--size Standard_B1ms \
 	--admin-username azuremol \
 	--generate-ssh-keys \
 	--zone 3

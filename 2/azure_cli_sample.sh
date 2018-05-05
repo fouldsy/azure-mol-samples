@@ -28,7 +28,7 @@ az vm create \
 
 # Obtain the public IP address of your VM. Enter the name of your resource
 # group and VM if you changed them
-public_ip=$(az vm show \
+publicIp=$(az vm show \
     --resource-group azuremolchapter2 \
     --name webvm \
     --show-details \
@@ -36,7 +36,7 @@ public_ip=$(az vm show \
     --output tsv)
 
 # SSH to your VM with the username and public IP address for your VM
-ssh adminuser@$public_ip
+ssh adminuser@$publicIp
 
 # Once logged in to your VM, install the LAMP web stack with apt-get
 sudo apt-get update && sudo apt install -y lamp-server^
@@ -46,4 +46,4 @@ logout
 az vm open-port --resource-group azuremolchapter2 --name webvm --port 80
 
 # Now you can access the basic website in your web browser
-echo "To see your web server in action, enter the public IP address in to your web browser: http://$public_ip"
+echo "To see your web server in action, enter the public IP address in to your web browser: http://$publicIp"

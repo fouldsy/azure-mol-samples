@@ -17,7 +17,7 @@ az network vnet create \
 az network public-ip create \
     --resource-group azuremolchapter5 \
     --name webpublicip \
-    --dns-name webmol
+    --dns-name webmolikf
 
 # Create a virtual network adapter
 # All VMs need a virtual network interace card (vNIC) that connects them to a
@@ -69,7 +69,7 @@ az network nsg create \
     --name remotensg
 
 # Create an additional network security group rule to allow SSH connections
-# Here, we don't specify the address prefixes,direction, or destinations, as the
+# Here, we don't specify the address prefixes, direction, or destinations, as the
 # Azure CLI can use smart defaults to populate these for us
 az network nsg rule create \
     --resource-group azuremolchapter5 \
@@ -97,7 +97,8 @@ az vm create \
     --name webvm \
     --nics webvnic \
     --image ubuntults \
-    --admin-username adminuser \
+    --size Standard_B1ms \
+    --admin-username azuremol \
     --generate-ssh-keys
 
 # Create a VM that will act as our remote connection VM
@@ -107,10 +108,11 @@ az vm create \
     --name remotevm \
     --vnet-name vnetmol \
     --subnet remotesubnet \
-    --nsg remotenmsg \
+    --nsg remotensg \
     --public-ip-address remotepublicip \
     --image ubuntults \
-    --admin-username adminuser \
+    --size Standard_B1ms \
+    --admin-username azuremol \
     --generate-ssh-keys
 
 # Enable the SSH agent and add our SSH keys
@@ -118,16 +120,12 @@ eval $(ssh-agent)
 ssh-add
 
 # Obtain the public IP address of the web server VM
-webvm_ip=$(az vm show \
+webvmIp=$(az vm show \
     --resource-group azuremolchapter5 \
-    --name webvm \
+    --name remotevm \
     --show-details \
     --query publicIps \
     --output tsv)
 
 # SSH to the remote VM, passing through our SSH keys
-ssh -A adminuser@$webvm_ip
-
-# Now, SSH to the internal IP address of the web server. This server is otherwise
-# secure and cannot be connected to via SSH directly
-ssh 10.0.1.4
+ssh -A azuremol@$webvmIp

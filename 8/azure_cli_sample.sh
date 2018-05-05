@@ -52,6 +52,18 @@ az network lb rule create \
     --backend-pool-name backendpool \
     --probe-name healthprobe
 
+# Create a Network Address Translation (NAT) rule
+# The NAT rule allows you to connect directly to VMs on a specific port
+# Here, TCP port 50001 is opened that maps to TCP port 22 on the VMs
+az network lb inbound-nat-rule create \
+    --resource-group azuremolchapter8 \
+    --lb-name loadbalancer \
+    --name natrulessh \
+    --protocol tcp \
+    --frontend-port 50001 \
+    --backend-port 22 \
+    --frontend-ip-name frontendpool
+
 # Create a virtual network and subnet
 # The VMs connect to these network resources
 az network vnet create \
@@ -79,6 +91,17 @@ az network nsg rule create \
     --priority 100 \
     --protocol tcp \
     --destination-port-range 80 \
+    --access allow
+
+# Create a Network Security Group rule
+# To allow SSH traffic to reach your VMs through the load balancer, allow TCP port 22
+az network nsg rule create \
+    --resource-group azuremolchapter8 \
+    --nsg-name webnsg \
+    --name allowssh \
+    --priority 101 \
+    --protocol tcp \
+    --destination-port-range 22 \
     --access allow
 
 # Update the virtual network subnet to attach the Network Security Group
@@ -117,6 +140,7 @@ az vm create \
 	--resource-group azuremolchapter8 \
 	--name webvm1 \
 	--image ubuntults \
+    --size Standard_B1ms \
 	--admin-username azuremol \
 	--generate-ssh-keys \
 	--zone 1 \
@@ -126,12 +150,12 @@ az vm create \
 # The Custom Script Extension runs on the first VM to install NGINX, clone the samples repo, then
 # copy the example web files to the required location
 az vm extension set \
+    --publisher Microsoft.Azure.Extensions \
+    --version 2.0 \
+    --name CustomScript \
     --resource-group azuremolchapter8 \
     --vm-name webvm1 \
-    --publisher Microsoft \
-    --name CustomScript \
-    --version 2.0 \
-    --setings
+    --settings '{"fileUris":["https://raw.githubusercontent.com/fouldsy/azure-mol-samples/cliscripts/8/install_webvm1.sh"],"commandToExecute":"sh install_webvm1.sh"}'
 
 # Create the second VM
 # Attach the second virtual NIC created in a previous step
@@ -140,6 +164,7 @@ az vm create \
 	--resource-group azuremolchapter8 \
 	--name webvm2 \
 	--image ubuntults \
+    --size Standard_B1ms \
 	--admin-username azuremol \
 	--generate-ssh-keys \
 	--zone 2 \
@@ -149,17 +174,20 @@ az vm create \
 # The Custom Script Extension runs on the second VM to install NGINX, clone the samples repo, then
 # copy the example web files to the required location
 az vm extension set \
+    --publisher Microsoft.Azure.Extensions \
+    --version 2.0 \
+    --name CustomScript \
     --resource-group azuremolchapter8 \
     --vm-name webvm2 \
-    --publisher Microsoft \
-    --name CustomScript \
-    --version 2.0 \
-    --setings
+    --settings '{"fileUris":["https://raw.githubusercontent.com/fouldsy/azure-mol-samples/cliscripts/8/install_webvm2.sh"],"commandToExecute":"sh install_webvm2.sh"}'
 
 # Show the public IP address that is attached to the load balancer
 # To see your application in action, open this IP address in a web browser
-az network public-ip show \
+publicIp=$(az network public-ip show \
     --resource-group azuremolchapter8 \
     --name publicip \
     --query ipAddress \
-    --output tsv
+    --output tsv)
+
+# Now you can access the load balancer and web servers in your web browser
+echo "To see your load balancer in action, enter the public IP address in to your web browser: http://$publicIp"
