@@ -16,14 +16,14 @@ az group create --name azuremolchapter2 --location eastus
 
 # Create a Linux VM
 # You specify the resoure group from the previous step, then provide a name.
-# This VM uses Ubuntu LTS as the VM image, and creates a user name `adminuser`
+# This VM uses Ubuntu LTS as the VM image, and creates a user name `azuremol`
 # The `--generate-ssh-keys` checks for keys you may have created earlier. If
 # SSH keys are found, they are used. Otherwise, they are created for you
 az vm create \
     --resource-group azuremolchapter2 \
     --name webvm \
     --image UbuntuLTS \
-    --admin-username adminuser \
+    --admin-username azuremol \
     --generate-ssh-keys
 
 # Obtain the public IP address of your VM. Enter the name of your resource
@@ -36,7 +36,7 @@ publicIp=$(az vm show \
     --output tsv)
 
 # SSH to your VM with the username and public IP address for your VM
-ssh adminuser@$publicIp
+ssh azuremol@$publicIp
 
 # Once logged in to your VM, install the LAMP web stack with apt-get
 sudo apt-get update && sudo apt install -y lamp-server^

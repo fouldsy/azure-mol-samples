@@ -1,26 +1,32 @@
 # Create a resource group
 az group create --name azuremolchapter14 --location eastus
 
+# Define a unique name for the Storage account
+storageAccount=mystorageaccount$RANDOM
+
 # Create an Azure Storage account
 # Enable Blob services encryption, and only permit HTTPS traffic
 az storage account create \
-	--name azuremolstorage \
 	--resource-group azuremolchapter14 \
+	--name $storageAccount \
 	--sku standard_lrs \
 	--encryption-services blob \
 	--https-only true
 
 # Verify that the Storage account is configured encryption and HTTPS traffic
 az storage account show \
-    --name azuremolstorage \
+    --name $storageAccount \
 	--resource-group azuremolchapter14 \
 	--query [enableHttpsTrafficOnly,encryption]
+
+# Define a unique name for the Key Vault
+keyVaultName=mykeyvault$RANDOM
 
 # Create an Azure Key Vault
 # Enable the vault for use with disk encryption
 az keyvault create \
 	--resource-group azuremolchapter14 \
-	--name azuremolkeyvault \
+	--name $keyVaultName \
 	--enabled-for-disk-encryption
 
 # Create a encryption key
@@ -28,7 +34,7 @@ az keyvault create \
 # A basic software vault is used to store the key rather than premium Hardware Security Module (HSM) vault
 # where all encrypt / decrypt operations are performed on the hardware device
 az keyvault key create \
-    --vault-name azuremolkeyvault \
+    --vault-name $keyVaultName \
     --name azuremolencryptionkey \
     --protection software
 
@@ -36,14 +42,13 @@ az keyvault key create \
 # A service principal is a special type of account in Azure Active Directory, seperate from regular user accounts
 # This servie principal is used to request access to the encryption key from Key Vault
 # Once the key is obtained from Key Vault, it can be used to encrypt / decrypt VMs 
-az ad sp create-for-rbac
-    --query “{spn_id:appId,secret:password}”
+read spnId secret <<< $(az ad sp create-for-rbac --query [appId,password] -o tsv)
 
 # Set permissions on Key Vault with policy
 # The policy grants the service principal created in the previous step permissions to retrieve the key
 az keyvault set-policy \
-    --name azuremolkeyvault \
-    --spn 4d1ab719-bd14-48fd-95d0-3aba9500b12f   \
+    --name $keyVaultName \
+    --spn $spnId   \
     --key-permissions wrapKey   \
     --secret-permissions set
 
@@ -60,10 +65,10 @@ az vm create \
 az vm encryption enable \
     --resource-group azuremolchapter14 \
     --name molvm \
-    --disk-encryption-keyvault azuremolkeyvault \
+    --disk-encryption-keyvault $keyVaultName \
     --key-encryption-key azuremolencryptionkey \
-    --aad-client-id 4d1ab719-bd14-48fd-95d0-3aba9500b12f \
-    --aad-client-secret 2575580b-3610-46b2-b3db-182d8741fd43
+    --aad-client-id $spnId \
+    --aad-client-secret $secret
 
 # Monitor the encryption status
 # When the status reports as VMRestartPending, the VM must be restarted to finalize encryption
