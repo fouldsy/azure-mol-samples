@@ -62,8 +62,8 @@ az vm extension set \
     --publisher Microsoft.Azure.Extensions \
     --version 2.0 \
     --name CustomScript \
-    --resource-group azuremolchapter8 \
-    --vm-name webvm1 \
-    --settings '{"fileUris":["https://raw.githubusercontent.com/fouldsy/azure-mol-samples/cliscripts/15/install_mysql_server.sh"]}'
+    --resource-group azuremolchapter15 \
+    --vm-name molvm \
+    --settings '{"fileUris":["https://raw.githubusercontent.com/fouldsy/azure-mol-samples/cliscripts/15/install_mysql_server.sh"]}' \
     --protected-settings '{"commandToExecute":"sh install_mysql_server.sh $keyVaultName"}'
 
