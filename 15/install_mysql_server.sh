@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Install jq JSON parser
 sudo apt-get install -y jq
 
@@ -9,8 +11,8 @@ database_password=$(curl https://$1.vault.azure.net/secrets/databasepassword?api
 
 # Assign the database passwoed obtained from Key Vault to debconf
 # This step allows the database password to be automatically populated during the install
-echo mysql-server mysql-server/root_password password $database_password | debconf-set-selections
-echo mysql-server mysql-server/root_password_again password $database_password | debconf-set-selections
+sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $database_password"
+sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $database_password"
 
 # Install the MySQL server
 sudo apt-get -y install mysql-server
