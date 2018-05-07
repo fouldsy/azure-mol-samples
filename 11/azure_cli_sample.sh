@@ -61,9 +61,9 @@ az appservice plan create \
 # Git is used as the deployment method
 az webapp create \
     --resource-group azuremolchapter11 \
-	--name $webAppNameEastUS \
-	--plan appserviceeastus \
-	--deployment-local-git
+    --name $webAppNameEastUS \
+    --plan appserviceeastus \
+    --deployment-local-git
 
 # Create an App Service plan
 # Two Web Apps are created, one for East US, and one for West Europe
@@ -80,8 +80,8 @@ az appservice plan create \
 az webapp create \
     --resource-group azuremolchapter11 \
     --name $webAppNameWestEurope \
-	--plan appservicewesteurope \
-	--deployment-local-git 
+    --plan appservicewesteurope \
+    --deployment-local-git 
 
 # Add endpoint for East US Traffic Manager profile
 # This endpoint is for the East US Web App, and sets with a high priority of 1
