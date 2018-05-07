@@ -1,0 +1,10 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: microsoft/azure-cli:2.0.31
+    steps:
+      - checkout
+      - run:
+          name: Run chapter 3 sample
+          command: azure-mol-samples/3/azure_cli_sample.sh
