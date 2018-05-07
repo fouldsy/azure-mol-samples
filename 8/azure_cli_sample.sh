@@ -1,3 +1,15 @@
+#!/bin/bash
+
+# This script sample is part of "Learn Azure in a Month of Lunches" (Manning
+# Publications) by Iain Foulds.
+#
+# This sample script covers the exercises from chapter 8 of the book. For more
+# information and context to these commands, read a sample of the book and
+# purchase at https://www.manning.com/books/learn-azure-in-a-month-of-lunches
+#
+# This script sample is released under the MIT license. For more information,
+# see https://github.com/fouldsy/azure-mol-samples/blob/master/LICENSE
+
 # Create a resource group
 az group create --name azuremolchapter8 --location westeurope
 
@@ -155,7 +167,7 @@ az vm extension set \
     --name CustomScript \
     --resource-group azuremolchapter8 \
     --vm-name webvm1 \
-    --settings '{"fileUris":["https://raw.githubusercontent.com/fouldsy/azure-mol-samples/cliscripts/8/install_webvm1.sh"],"commandToExecute":"sh install_webvm1.sh"}'
+    --settings '{"fileUris":["https://raw.githubusercontent.com/fouldsy/azure-mol-samples/master/8/install_webvm1.sh"],"commandToExecute":"sh install_webvm1.sh"}'
 
 # Create the second VM
 # Attach the second virtual NIC created in a previous step
@@ -179,7 +191,7 @@ az vm extension set \
     --name CustomScript \
     --resource-group azuremolchapter8 \
     --vm-name webvm2 \
-    --settings '{"fileUris":["https://raw.githubusercontent.com/fouldsy/azure-mol-samples/cliscripts/8/install_webvm2.sh"],"commandToExecute":"sh install_webvm2.sh"}'
+    --settings '{"fileUris":["https://raw.githubusercontent.com/fouldsy/azure-mol-samples/master/8/install_webvm2.sh"],"commandToExecute":"sh install_webvm2.sh"}'
 
 # Show the public IP address that is attached to the load balancer
 # To see your application in action, open this IP address in a web browser

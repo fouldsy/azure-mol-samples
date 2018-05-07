@@ -1,3 +1,15 @@
+#!/bin/bash
+
+# This script sample is part of "Learn Azure in a Month of Lunches" (Manning
+# Publications) by Iain Foulds.
+#
+# This sample script covers the exercises from chapter 11 of the book. For more
+# information and context to these commands, read a sample of the book and
+# purchase at https://www.manning.com/books/learn-azure-in-a-month-of-lunches
+#
+# This script sample is released under the MIT license. For more information,
+# see https://github.com/fouldsy/azure-mol-samples/blob/master/LICENSE
+
 # Define variables for unique resource names
 # As we create DNS entries for Traffic Manager profiles and Web Apps, these
 # DNS names must be unique. By adding some randomization to the resource names, the

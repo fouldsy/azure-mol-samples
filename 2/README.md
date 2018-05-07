@@ -1,0 +1,1 @@
+This sample script creates a basic VM with the Azure CLI, then shows you the commands to SSH to the VM and install the LAMP stack.
