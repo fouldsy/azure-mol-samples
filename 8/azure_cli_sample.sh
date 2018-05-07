@@ -129,34 +129,34 @@ az network vnet subnet update \
 # This step makes sure that the VM is secured as soon as it is created
 az network nic create \
     --resource-group azuremolchapter8 \
-  	--name webnic1 \
-  	--vnet-name vnetmol \
-  	--subnet subnetmol \
-  	--lb-name loadbalancer \
-	--lb-address-pools backendpool \
-	--lb-inbound-nat-rules natrulessh
+    --name webnic1 \
+    --vnet-name vnetmol \
+    --subnet subnetmol \
+    --lb-name loadbalancer \
+    --lb-address-pools backendpool \
+    --lb-inbound-nat-rules natrulessh
 
 # Create a virtual NIC for use with the second VM
 az network nic create \
-  	--resource-group azuremolchapter8 \
-  	--name webnic2 \
-  	--vnet-name vnetmol \
-  	--subnet subnetmol \
-  	--lb-name loadbalancer \
-	--lb-address-pools backendpool
+    --resource-group azuremolchapter8 \
+    --name webnic2 \
+    --vnet-name vnetmol \
+    --subnet subnetmol \
+    --lb-name loadbalancer \
+    --lb-address-pools backendpool
 
 # Create the first VM
 # Attach the first virtual NIC created in a previous step
 # For high availability, create the VM in zone 1
 az vm create \
-	--resource-group azuremolchapter8 \
-	--name webvm1 \
-	--image ubuntults \
+    --resource-group azuremolchapter8 \
+    --name webvm1 \
+    --image ubuntults \
     --size Standard_B1ms \
-	--admin-username azuremol \
-	--generate-ssh-keys \
-	--zone 1 \
-	--nics webnic1
+    --admin-username azuremol \
+    --generate-ssh-keys \
+    --zone 1 \
+    --nics webnic1
 
 # Apply the Custom Script Extension
 # The Custom Script Extension runs on the first VM to install NGINX, clone the samples repo, then
@@ -173,14 +173,14 @@ az vm extension set \
 # Attach the second virtual NIC created in a previous step
 # For high availability, create the VM in zone 2
 az vm create \
-	--resource-group azuremolchapter8 \
-	--name webvm2 \
-	--image ubuntults \
+    --resource-group azuremolchapter8 \
+    --name webvm2 \
+    --image ubuntults \
     --size Standard_B1ms \
-	--admin-username azuremol \
-	--generate-ssh-keys \
-	--zone 2 \
-	--nics webnic2
+    --admin-username azuremol \
+    --generate-ssh-keys \
+    --zone 2 \
+    --nics webnic2
 
 # Apply the Custom Script Extension
 # The Custom Script Extension runs on the second VM to install NGINX, clone the samples repo, then
