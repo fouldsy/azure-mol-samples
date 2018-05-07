@@ -18,16 +18,16 @@ az group create --name azuremolchapter9 --location westeurope
 # For high availability, a standard SKU LB is created, and the VM instanes are distributed
 # across zone 1
 az vmss create \
-	--resource-group azuremolchapter9 \
-	--name scalesetmol \
-	--image UbuntuLTS \
-	--admin-username azuremol \
-	--generate-ssh-keys \
-	--instance-count 2 \
+    --resource-group azuremolchapter9 \
+    --name scalesetmol \
+    --image UbuntuLTS \
+    --admin-username azuremol \
+    --generate-ssh-keys \
+    --instance-count 2 \
     --vm-sku Standard_B1ms \
-	--upgrade-policy-mode automatic \
-	--lb-sku standard \
-	--zones 1 2 3
+    --upgrade-policy-mode automatic \
+    --lb-sku standard \
+    --zones 1 2 3
 
 # Manually scale the number of VM instances up to 4 instances
 az vmss scale \
