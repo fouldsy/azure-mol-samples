@@ -23,13 +23,16 @@ az network vnet create \
     --subnet-name websubnet \
     --subnet-prefix 10.0.1.0/24
 
+# Define a unique DNS name
+dnsName=azuremol$RANDOM
+
 # Create a public IP address
 # This public IP address assigned gets assigned to a web server VM in a
 # following step. We also assigned the DNS prefix of `webmol`
 az network public-ip create \
     --resource-group azuremolchapter5 \
     --name webpublicip \
-    --dns-name webmolikf
+    --dns-name $dnsName
 
 # Create a virtual network adapter
 # All VMs need a virtual network interace card (vNIC) that connects them to a
