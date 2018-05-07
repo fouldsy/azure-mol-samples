@@ -1,0 +1,1 @@
+These sample DSC configurations are used with Azure Automation to deploy a web server to a VM.

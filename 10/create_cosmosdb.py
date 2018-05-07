@@ -1,3 +1,13 @@
+# This script sample is part of "Learn Azure in a Month of Lunches" (Manning
+# Publications) by Iain Foulds.
+#
+# This sample script covers the exercises from chapter 10 of the book. For more
+# information and context to these commands, read a sample of the book and
+# purchase at https://www.manning.com/books/learn-azure-in-a-month-of-lunches
+#
+# This script sample is released under the MIT license. For more information,
+# see https://github.com/fouldsy/azure-mol-samples/blob/master/LICENSE
+
 import string,random,time,azurerm,json
 import pydocumentdb
 import pydocumentdb.document_client as document_client
@@ -8,7 +18,6 @@ subscription_id = azurerm.get_subscription_from_cli()
 
 # Define variables with random resource group and Cosmos DB account names
 resourcegroup_name = 'azuremol'+''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(6))
-#resourcegroup_name = 'cosmosdbmol'
 cosmosdb_name = 'azuremol'+''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(6))
 location = 'eastus'
 

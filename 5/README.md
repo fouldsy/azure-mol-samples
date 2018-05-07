@@ -1,0 +1,3 @@
+This sample script creates an Azure virtual network with two subnets, and a network security group that secures inbound traffic. One subnet is for remote access traffic, one is web traffic for VMs that run a web server.
+
+Two VMs are then created. One allows SSH access and has the appropriate network security group rules applied. You use this VM as an SSH jumpbox to then connect to the the second VM which can be used an web server.

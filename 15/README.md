@@ -1,0 +1,3 @@
+This sample script creates an Azure Key Vault, then creates a secret that can be used as the database password for deployment scripts. A Managed Service Identity is created and assigned to a VM, with permissions to get the secret.
+
+The Custom Script Extension is then used to tell the VM to get the secret from Key Vault using the Instance Metadata Service, then install the MySQL Server and perform and automated install with the secret presented as the server password during the deployment.

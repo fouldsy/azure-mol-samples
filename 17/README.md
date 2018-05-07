@@ -1,0 +1,1 @@
+These samples are used to create a LUIS app for pizza store data model, then deploy an Azure Web App Bot that connects to the LUIS app for customers to perform basic pizza store orders.
