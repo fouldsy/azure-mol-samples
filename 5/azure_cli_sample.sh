@@ -135,7 +135,7 @@ eval $(ssh-agent)
 ssh-add
 
 # Obtain the public IP address of the web server VM
-webvmIp=$(az vm show \
+remotevmIp=$(az vm show \
     --resource-group azuremolchapter5 \
     --name remotevm \
     --show-details \
@@ -143,4 +143,4 @@ webvmIp=$(az vm show \
     --output tsv)
 
 # SSH to the remote VM, passing through our SSH keys
-ssh -A azuremol@$webvmIp
+ssh -A azuremol@$remotevmIp
