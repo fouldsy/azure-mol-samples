@@ -42,7 +42,7 @@ az monitor autoscale create \
     --resource-group azuremolchapter9 \
     --name autoscalevmss \
     --resource scalesetmol \
-    --resource-type Microsoft.Compute/virtualMachineScaleSets
+    --resource-type Microsoft.Compute/virtualMachineScaleSets \
     --min-count 2 \
     --max-count 10 \
     --count 2
