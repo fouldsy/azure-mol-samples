@@ -33,6 +33,10 @@ az backup vault create \
     --resource-group azuremolchapter13 \
     --name molvault \
     --location eastus
+    
+# It can take a few seconds for the Recovery Services vault to become
+# available, so wait before trying to enable the VM for protection
+sleep 10
 
 # Enable backup for the VM
 # The Recovery Services vault created in the previous step is used as the
@@ -60,3 +64,5 @@ az backup job list \
     --resource-group azuremolchapter13 \
     --vault-name molvault \
     --output table
+    
+echo "It can take 25-30 minutes for the initial backup job to complete."
