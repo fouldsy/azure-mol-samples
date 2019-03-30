@@ -32,7 +32,7 @@ az container show \
     --output tsv
 
 # Create an Azure Container Service with Kubernetes (AKS) cluster
-# Two nodes are created. It can take 15-20 minutes for this operation to
+# Two nodes are created. It can take ~10 minutes for this operation to
 # successfully complete.
 az aks create \
     --resource-group azuremolchapter19 \
@@ -47,11 +47,15 @@ az aks create \
 az aks get-credentials \
     --resource-group azuremolchapter19 \
     --name azuremol
+    
+# Install the kubectl CLI for managing the Kubernetes cluster
+az aks install-cli
 
 # Start an Kubernetes deployment
 # This deployment uses the same base container image as the ACI instance in
 # a previous example. Again, port 80 is opened to allow web traffic.
 kubectl run azuremol \
+    --generator=deployment/v1beta1 \
     --image=docker.io/iainfoulds/azuremol:latest \
     --port=80
 
@@ -59,11 +63,16 @@ kubectl run azuremol \
 # Although port 80 is open to the deployment, external traffic can't reach the
 # Kubernetes pods that run the containers. A load balancer needs to be created
 # that maps external traffic on port 80 to the pods. Although this is a
-# Kubernetes command, kubectl, under the hood an Azure load balancer and rules
+# Kubernetes command (kubectl) under the hood an Azure load balancer and rules
 # are created
 kubectl expose deployment/azuremol \
     --type="LoadBalancer" \
     --port 80
+    
+# View the public IP address of the load balancer
+# It can take 2-3 minutes for the load balancer to be created and the public
+# IP address associated to correctly direct traffic to the pod
+kubectl get service
 
 # Scale out the number of nodes in the AKS cluster
 # The cluster is scaled up to 3 nodes
