@@ -89,5 +89,6 @@ az vm diagnostics set \
     --settings "$diagnosticsConfig" \
     --protected-settings "$protectedSettings"
 
-
+# Restart the VM for the diagnostics extension to finalize install and
+# begin streaming logs
 az vm restart --resource-group azuremolchapter12 --name molvm
