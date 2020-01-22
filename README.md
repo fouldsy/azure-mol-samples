@@ -1,3 +1,5 @@
+**NOTE** - If you run into issues with some of these sample scripts and applications, please check the 2nd edition versions at https://github.com/fouldsy/azure-mol-samples-2nd-ed. The 2nd edition samples are updated for the latest SDKs and Azure behavior. These 1st edition samples are left as-is so they don't deviate from what's actually publish in the 1st edition of the book.
+
 Supporting resources for "Learn Azure in a Month of Lunches" by Manning Publications
 More info on the book available here - https://www.manning.com/books/learn-azure-in-a-month-of-lunches
 
